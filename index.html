@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>SketchPad</title>
+</head>
+<body>
+
+    <div id="container"></div>
+
+
+
+    <button id = "clear">Re-size Grid</button>
+    
+
+    <script>
+        const gridContainer = document.getElementById("container");
+        let item; 
+        let gridNum = 256; 
+
+
+            function createGrid() {
+                 for (let i = 0; i < gridNum; i++) {
+                    item = document.createElement("div");
+                    item.classList.add("grid-item");
+                    gridContainer.appendChild(item);
+                    console.log(i)
+                }   
+                }
+
+            createGrid();
+
+            const gridItem = document.querySelector("div"); 
+            gridItem.addEventListener("mouseover", function(event){
+                event.target.classList.replace("grid-item", "color")
+            });
+
+            
+            let width; 
+            let height; 
+
+
+            function updateGrid(w, h) {
+                gridContainer.innerHTML = ""; 
+                gridContainer.style.setProperty ("grid-template-columns", `repeat(${num},2fr)`)
+                gridContainer.style.setProperty("grid-template-rows", `repeat(${num},2fr)`)
+                createGrid(); 
+            }
+
+            let clear = document.getElementById("clear");
+
+            clear.addEventListener("click", function(){
+                num = prompt('New grid size'); 
+                gridNum = num * num;
+                
+                if (gridNum < 10000) {
+                   updateGrid(num, num);  
+                } else {
+                    alert('Grid cannot be larger than 100x100, choose a smaller number.')
+                    
+                }
+                
+
+            })
+            
+    
+
+    </script>
+</body>
+</html>
